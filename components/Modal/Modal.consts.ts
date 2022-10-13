@@ -1,0 +1,4 @@
+export const OPEN_SCALE_DURATION = 150;
+export const OPEN_OPACITY_DURATION = 300;
+export const CLOSE_SCALE_DURATION = 200;
+export const CLOSE_OPACITY_DURATION = 150;

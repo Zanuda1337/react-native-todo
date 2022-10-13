@@ -1,20 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'react-native';
+import React, { useCallback, useEffect } from 'react';
+import ToDoList from './feautures/ToDoList/ToDoList';
+import styled from 'styled-components/native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Inter-ExtraLight': require('./assets/fonts/Inter-ExtraLight.ttf'),
+    'Inter-Light': require('./assets/fonts/Inter-Light.ttf'),
+    'Inter-Thin': require('./assets/fonts/Inter-Thin.ttf'),
+    'Inter-Regular': require('./assets/fonts/Inter-Regular.ttf'),
+    'Inter-Medium': require('./assets/fonts/Inter-Medium.ttf'),
+    'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
+    'Inter-SemiBold': require('./assets/fonts/Inter-SemiBold.ttf'),
+    'Inter-ExtraBold': require('./assets/fonts/Inter-ExtraBold.ttf'),
+    'Inter-Black': require('./assets/fonts/Inter-Black.ttf'),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  const onLayout = useCallback(async () => {
+    if (fontsLoaded) await SplashScreen.hideAsync();
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <Container onLayout={onLayout}>
+        <ToDoList />
+      </Container>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Container = styled.SafeAreaView`
+  margin-top: ${StatusBar.currentHeight}px;
+  flex: 1;
+  background-color: #fff;
+`;
