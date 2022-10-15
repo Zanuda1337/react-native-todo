@@ -1,13 +1,16 @@
 import React, { useRef, useState } from 'react';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import ToDoItem from './ToDo/ToDoItem';
 import Modal from '../../components/Modal/Modal';
-import AddToDoForm from './ToDo/AddTodoForm/AddToDoForm';
+import AddToDoForm from './ToDoItem/AddTodoForm/AddToDoForm';
+import FilterModal from './ToDoItem/FilterModal/FilterModal';
+import ToDoItem from './ToDoItem/ToDoItem';
+import { TToDo } from './ToDoItem/ToDoItem.types';
+import { filterOptions } from './ToDoList.consts';
 import { ScrollView } from 'react-native';
 import { RootState } from '../../redux/store.types';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getFilteredValue, scrollToDosToBottom } from './ToDoList.utils';
-import { filterStates, TFilterBy, TFilterOption } from './ToDoList.types';
+import { TFilterBy, TFilterOption } from './ToDoList.types';
 import {
   addToDo,
   removeToDo,
@@ -21,9 +24,6 @@ import {
   Title,
   ToDoContainer,
 } from './ToDoList.styles';
-import { TToDo } from './ToDo/ToDo.types';
-import FilterModal from './ToDo/FilterModal/FilterModal';
-import { filterOptions } from './ToDoList.consts';
 
 const ToDoList: React.FC = () => {
   const dispatch = useAppDispatch();

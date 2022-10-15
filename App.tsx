@@ -1,11 +1,12 @@
-import { StatusBar } from 'react-native';
-import React, { useCallback, useEffect } from 'react';
 import ToDoList from './feautures/ToDoList/ToDoList';
 import styled from 'styled-components/native';
-import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import React, { useCallback, useEffect } from 'react';
+import { StatusBar } from 'react-native';
+import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import { globalTheme } from './assets/styles/globalTheme';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -44,5 +45,5 @@ export default function App() {
 const Container = styled.SafeAreaView`
   margin-top: ${StatusBar.currentHeight}px;
   flex: 1;
-  background-color: #fff;
+  background-color: ${globalTheme.colors['main-background']};
 `;

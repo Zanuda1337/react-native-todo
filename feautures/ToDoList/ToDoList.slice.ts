@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toDoListMocks } from './ToDoList.mocks';
-import { TToDo } from './ToDo/ToDo.types';
+import { TToDo } from './ToDo/ToDoItem.types';
 import { AppThunk } from '../../redux/store.types';
 
 interface IToDoListState {

@@ -1,4 +1,4 @@
-import { TToDo } from './ToDo/ToDo.types';
+import { TToDo } from './ToDo/ToDoItem.types';
 
 export const toDoListMocks: TToDo[] = [
   {

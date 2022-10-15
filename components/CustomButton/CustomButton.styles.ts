@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
+import { globalTheme } from '../../assets/styles/globalTheme';
 
 export interface IStyledButtonProps {
   variant?: 'filled' | 'outlined' | 'ghost';
@@ -11,17 +12,26 @@ export interface IStyledButtonProps {
 export const StyledView = styled.View`
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: ${globalTheme.responsiveValue * 0.8}px;
 `;
 export const StyledButton = styled.View<IStyledButtonProps>`
   border-width: ${({ variant }) =>
-    variant === 'ghost' || variant === 'filled' ? 0 : '2px'};
+    variant === 'ghost' || variant === 'filled'
+      ? 0
+      : `${globalTheme.responsiveValue * 0.2}px`};
   border-color: ${({ variant }) =>
-    variant === 'ghost' || variant === 'filled' ? 'unset' : '#3785cc'};
-  border-radius: 8px;
+    variant === 'ghost' || variant === 'filled'
+      ? 'unset'
+      : globalTheme.colors['main-foreground']};
+  border-radius: ${globalTheme.responsiveValue * 0.8}px;
   background-color: ${({ variant }) =>
-    variant === 'filled' ? '#3785cc' : 'transparent'};
-  padding: ${({ size }) => (size === 'small' ? '9px' : '15px')};
+    variant === 'filled'
+      ? globalTheme.colors['main-foreground']
+      : 'transparent'};
+  padding: ${({ size }) =>
+    size === 'small'
+      ? `${globalTheme.responsiveValue * 0.9}px`
+      : `${globalTheme.responsiveValue * 1.5}px`};
   opacity: ${({ disabled }) => (disabled ? '0.3' : '1')};
 `;
 export const ButtonText = styled.Text<IStyledButtonProps>`
@@ -29,7 +39,9 @@ export const ButtonText = styled.Text<IStyledButtonProps>`
     if (variant === 'filled') {
       return '#fff';
     } else {
-      return color === 'blue' ? '#3785cc' : '#C3C3C5';
+      return color === 'blue'
+        ? globalTheme.colors['main-foreground']
+        : globalTheme.colors['foreground-pale'];
     }
   }};
   text-transform: none;
@@ -39,11 +51,11 @@ export const ButtonText = styled.Text<IStyledButtonProps>`
   font-size: ${({ textSize }) => {
     switch (textSize) {
       case 'small':
-        return '14px';
+        return `${globalTheme.responsiveValue * 1.4}px`;
       case 'medium':
-        return '16px';
+        return `${globalTheme.responsiveValue * 1.6}px`;
       case 'large':
-        return '17px';
+        return `${globalTheme.responsiveValue * 1.7}px`;
       default:
         return;
     }
@@ -54,6 +66,8 @@ export const HighLight = styled(Animated.View)<IStyledButtonProps>`
   width: 100%;
   height: 100%;
   background-color: ${({ variant }) =>
-    variant === 'filled' ? 'rgba(255,255,255,0.1)' : 'rgba(98,166,229,0.1)'};
+    variant === 'filled'
+      ? globalTheme.colors['main-background-highlighted']
+      : globalTheme.colors['main-foreground-highlighted']};
   z-index: 1;
 `;

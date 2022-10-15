@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { filterStates, TFilterBy } from './ToDoList.types';
-import { TToDo } from './ToDo/ToDo.types';
+import { TToDo } from './ToDo/ToDoItem.types';
 
 export const scrollToDosToBottom = (
   scrollViewRef: React.RefObject<ScrollView>
